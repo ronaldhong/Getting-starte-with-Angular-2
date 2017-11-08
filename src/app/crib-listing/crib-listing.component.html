@@ -2,5 +2,11 @@
   {{cribs | json}}
 </pre> -->
 <div *ngFor="let crib of cribs">
-  <h3>{{crib.address}}</h3>
+  <!-- <div class="thumbnail">
+    <img src="assets/image/{{crib.image}}.jpg" alt="">
+    <h3>{{crib.address}}</h3>
+    <h4>${{crib.price}}</h4>
+    <h4>{{crib.type}}</h4>
+  </div> -->
+  <app-crib-card [crib]="crib" class="col-sm-4"></app-crib-card>
 </div>
