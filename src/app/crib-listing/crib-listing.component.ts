@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { cribs} from '../data/cribs'
+import { Cribs} from '../data/cribs'
 
 @Component({
   selector: 'app-crib-listing',
