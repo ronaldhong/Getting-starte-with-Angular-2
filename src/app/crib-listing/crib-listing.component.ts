@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Http} from '@angular/http'
 /*transform value back as json  .map*/
+import {CribsService} from './../services/cribs.service';
 import "rxjs/add/operator/map";
 
 @Component({
@@ -12,16 +13,24 @@ export class CribListingComponent implements OnInit {
 
   cribs: Array<any>;
   error: String;
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private cribsService:CribsService
+  ) { }
 
 
 /*Angular 2 use observable (.subscribe), not promise or callback*/
   ngOnInit() {
-    this.http.get('data/cribs.json').map(res=> res.json())
+    // this.http.get('data/cribs.json').map(res=> res.json())
+    // .subscribe(
+    //   data => this.cribs = data,
+    //   error => this.error = error.statusText
+    // );
+    this.cribsService.getAllCribs()
     .subscribe(
-    data => this.cribs = data,
-    error => this.error = error.statusText
-    )
+      data => this.cribs = data,
+      error => this.error = error.statusText
+    );
   }
 
 }
