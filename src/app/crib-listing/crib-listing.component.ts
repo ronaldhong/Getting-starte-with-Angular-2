@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Cribs} from '../data/cribs'
+import {Http} from '@angular/http'
+/*transform value back as json  .map*/
+import "rxjs/add/operator/map";
 
 @Component({
   selector: 'app-crib-listing',
@@ -8,11 +10,18 @@ import { Cribs} from '../data/cribs'
 })
 export class CribListingComponent implements OnInit {
 
-  cribs: Array<any> = cribs;
+  cribs: Array<any>;
+  error: String;
+  constructor(private http: Http) { }
 
-  constructor() { }
 
+/*Angular 2 use observable (.subscribe), not promise or callback*/
   ngOnInit() {
+    this.http.get('data/cribs.json').map(res=> res.json())
+    .subscribe(
+    data => this.cribs = data,
+    error => this.error = error.statusText
+    )
   }
 
 }
